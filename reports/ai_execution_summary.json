@@ -1,0 +1,84 @@
+{
+  "application": {
+    "app_name": "AI Commerce Demo",
+    "base_url": "http://127.0.0.1:5000",
+    "routes": [
+      {
+        "path": "/",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "index"
+      },
+      {
+        "path": "/cart",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "cart"
+      },
+      {
+        "path": "/cart",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "add_cart"
+      },
+      {
+        "path": "/checkout",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "checkout"
+      },
+      {
+        "path": "/login",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "login"
+      },
+      {
+        "path": "/logout",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "logout"
+      },
+      {
+        "path": "/products",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "products"
+      },
+      {
+        "path": "/static/<path:filename>",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "static"
+      }
+    ],
+    "credentials": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "ui_capabilities": [
+      "login",
+      "search",
+      "add_to_cart",
+      "checkout"
+    ]
+  },
+  "generated_test_files": [
+    "tests/generated/test_ai_generated_api.py",
+    "tests/generated/test_ai_generated_ui.py"
+  ],
+  "result_summary": {
+    "collected": 7,
+    "passed": 0,
+    "failed": 0,
+    "errors": 7
+  }
+}

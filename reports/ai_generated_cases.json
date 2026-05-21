@@ -1,0 +1,83 @@
+[
+  {
+    "id": "api_login_positive",
+    "layer": "api",
+    "feature": "login",
+    "type": "positive",
+    "title": "AI generated API test: valid user can log in",
+    "route": "/login",
+    "input": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "expected_status": 200,
+    "expected_key": "message",
+    "expected_value": "Login successful"
+  },
+  {
+    "id": "api_products_requires_auth",
+    "layer": "api",
+    "feature": "products",
+    "type": "negative",
+    "title": "AI generated API test: products endpoint rejects anonymous access",
+    "route": "/products",
+    "expected_status": 401,
+    "expected_key": "error",
+    "expected_value": "Authentication required"
+  },
+  {
+    "id": "api_checkout_positive",
+    "layer": "api",
+    "feature": "checkout",
+    "type": "positive",
+    "title": "AI generated API test: logged in user can add product and checkout",
+    "route": "/checkout",
+    "setup": {
+      "login": true,
+      "add_to_cart": {
+        "product_id": 1,
+        "quantity": 1
+      }
+    },
+    "expected_status": 200,
+    "expected_key": "message",
+    "expected_value": "Checkout complete"
+  },
+  {
+    "id": "ui_login_positive",
+    "layer": "ui",
+    "feature": "login",
+    "type": "positive",
+    "title": "AI generated UI test: valid login updates the session banner",
+    "input": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "expected_text": "Logged in as demouser"
+  },
+  {
+    "id": "ui_search_product",
+    "layer": "ui",
+    "feature": "search",
+    "type": "positive",
+    "title": "AI generated UI test: searching for Laptop narrows products to one card",
+    "search_term": "Laptop",
+    "expected_count": 1
+  },
+  {
+    "id": "ui_add_to_cart",
+    "layer": "ui",
+    "feature": "cart",
+    "type": "positive",
+    "title": "AI generated UI test: adding a product creates a cart item",
+    "expected_min_cart_items": 1
+  },
+  {
+    "id": "ui_checkout",
+    "layer": "ui",
+    "feature": "checkout",
+    "type": "positive",
+    "title": "AI generated UI test: checkout displays the completion message",
+    "expected_text": "Checkout complete"
+  }
+]

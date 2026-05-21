@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; background: #f7f8fa; color: #1f2937; }
+        .card { background: white; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+        code, pre { background: #111827; color: #f9fafb; padding: 0.2rem 0.4rem; border-radius: 6px; }
+        pre { padding: 1rem; white-space: pre-wrap; }
+        ul { padding-left: 1.1rem; }
+    </style>
+</head>
+<body>
+    <h1>Automation Results Dashboard</h1>
+    <div class="card">
+        <h2>Generated Artifacts</h2>
+        <ul>
+            <li>PyTest HTML report: <code>reports/report.html</code></li>
+            <li>Allure results folder: <code>reports/allure-results</code></li>
+            <li>AI test cases: <code>reports/ai_generated_cases.json</code></li>
+            <li>Execution log: <code>reports/logs/test_execution.log</code></li>
+        </ul>
+    </div>
+    <div class="card">
+        <h2>Autonomous Execution Summary</h2>
+        <pre>{
+  "application": {
+    "app_name": "AI Commerce Demo",
+    "base_url": "http://127.0.0.1:5000",
+    "routes": [
+      {
+        "path": "/",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "index"
+      },
+      {
+        "path": "/cart",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "cart"
+      },
+      {
+        "path": "/cart",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "add_cart"
+      },
+      {
+        "path": "/checkout",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "checkout"
+      },
+      {
+        "path": "/login",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "login"
+      },
+      {
+        "path": "/logout",
+        "methods": [
+          "POST"
+        ],
+        "endpoint": "logout"
+      },
+      {
+        "path": "/products",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "products"
+      },
+      {
+        "path": "/static/<path:filename>",
+        "methods": [
+          "GET"
+        ],
+        "endpoint": "static"
+      }
+    ],
+    "credentials": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "ui_capabilities": [
+      "login",
+      "search",
+      "add_to_cart",
+      "checkout"
+    ]
+  },
+  "generated_test_files": [
+    "tests/generated/test_ai_generated_api.py",
+    "tests/generated/test_ai_generated_ui.py"
+  ],
+  "result_summary": {
+    "collected": 7,
+    "passed": 0,
+    "failed": 0,
+    "errors": 7
+  }
+}</pre>
+    </div>
+    <div class="card">
+        <h2>AI Test Cases</h2>
+        <pre>[
+  {
+    "id": "api_login_positive",
+    "layer": "api",
+    "feature": "login",
+    "type": "positive",
+    "title": "AI generated API test: valid user can log in",
+    "route": "/login",
+    "input": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "expected_status": 200,
+    "expected_key": "message",
+    "expected_value": "Login successful"
+  },
+  {
+    "id": "api_products_requires_auth",
+    "layer": "api",
+    "feature": "products",
+    "type": "negative",
+    "title": "AI generated API test: products endpoint rejects anonymous access",
+    "route": "/products",
+    "expected_status": 401,
+    "expected_key": "error",
+    "expected_value": "Authentication required"
+  },
+  {
+    "id": "api_checkout_positive",
+    "layer": "api",
+    "feature": "checkout",
+    "type": "positive",
+    "title": "AI generated API test: logged in user can add product and checkout",
+    "route": "/checkout",
+    "setup": {
+      "login": true,
+      "add_to_cart": {
+        "product_id": 1,
+        "quantity": 1
+      }
+    },
+    "expected_status": 200,
+    "expected_key": "message",
+    "expected_value": "Checkout complete"
+  },
+  {
+    "id": "ui_login_positive",
+    "layer": "ui",
+    "feature": "login",
+    "type": "positive",
+    "title": "AI generated UI test: valid login updates the session banner",
+    "input": {
+      "username": "demouser",
+      "password": "Password123"
+    },
+    "expected_text": "Logged in as demouser"
+  },
+  {
+    "id": "ui_search_product",
+    "layer": "ui",
+    "feature": "search",
+    "type": "positive",
+    "title": "AI generated UI test: searching for Laptop narrows products to one card",
+    "search_term": "Laptop",
+    "expected_count": 1
+  },
+  {
+    "id": "ui_add_to_cart",
+    "layer": "ui",
+    "feature": "cart",
+    "type": "positive",
+    "title": "AI generated UI test: adding a product creates a cart item",
+    "expected_min_cart_items": 1
+  },
+  {
+    "id": "ui_checkout",
+    "layer": "ui",
+    "feature": "checkout",
+    "type": "positive",
+    "title": "AI generated UI test: checkout displays the completion message",
+    "expected_text": "Checkout complete"
+  }
+]</pre>
+    </div>
+    <div class="card">
+        <h2>Failure Screenshots</h2>
+        <pre>[
+  "test_add_to_cart.png",
+  "test_search_product.png"
+]</pre>
+    </div>
+    <div class="card">
+        <h2>Recent Execution Logs</h2>
+        <pre>2026-05-13 12:36:53,162 | INFO | pytest | Closed Selenium driver
+2026-05-13 12:36:53,163 | INFO | pytest | Stopped local Flask server
+2026-05-13 12:36:53,165 | INFO | pytest | PyTest finished with exit status 0
+2026-05-13 12:42:03,833 | INFO | pytest | Starting local Flask server for test session
+2026-05-13 12:42:03,874 | INFO | pytest | Launching Selenium driver | browser=brave | headless=True
+2026-05-13 12:42:08,096 | INFO | pytest | Closed Selenium driver
+2026-05-13 12:42:08,098 | INFO | pytest | Launching Selenium driver | browser=brave | headless=True
+2026-05-13 12:42:10,727 | INFO | pytest | Closed Selenium driver
+2026-05-13 12:42:10,729 | INFO | pytest | Launching Selenium driver | browser=brave | headless=True
+2026-05-13 12:42:13,704 | INFO | pytest | Closed Selenium driver
+2026-05-13 12:42:13,706 | INFO | pytest | Launching Selenium driver | browser=brave | headless=True
+2026-05-13 12:42:15,753 | INFO | pytest | Closed Selenium driver
+2026-05-13 12:42:15,754 | INFO | pytest | Stopped local Flask server
+2026-05-13 12:42:15,757 | INFO | pytest | PyTest finished with exit status 0
+2026-05-18 23:25:31,498 | INFO | pytest | Starting local Flask server for test session
+2026-05-18 23:25:51,606 | INFO | pytest | PyTest finished with exit status 1
+2026-05-18 23:29:08,110 | INFO | pytest | Starting local Flask server for test session
+2026-05-18 23:29:28,184 | INFO | pytest | PyTest finished with exit status 1
+2026-05-19 19:01:26,817 | INFO | pytest | Starting local Flask server for test session
+2026-05-19 19:01:46,902 | INFO | pytest | PyTest finished with exit status 1</pre>
+    </div>
+</body>
+</html>

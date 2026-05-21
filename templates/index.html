@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Commerce Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">AI-Powered Web Application Demo</p>
+                <h1>Commerce Console</h1>
+                <p class="subtitle">A compact e-commerce experience built for automation, API, and reporting demos.</p>
+            </div>
+            <div class="status-panel">
+                <span id="user-status">Not logged in</span>
+                <button id="logout-btn" class="secondary" hidden>Logout</button>
+            </div>
+        </header>
+
+        <main class="grid">
+            <section class="card login-card">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <label>Username
+                        <input type="text" id="username" value="demouser" autocomplete="username">
+                    </label>
+                    <label>Password
+                        <input type="password" id="password" value="Password123" autocomplete="current-password">
+                    </label>
+                    <button type="submit">Login</button>
+                </form>
+                <p class="hint">Demo credentials: <strong>demouser / Password123</strong></p>
+                <p id="login-message" class="message"></p>
+            </section>
+
+            <section class="card products-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Products</h2>
+                        <p>Search and add products to the cart.</p>
+                    </div>
+                    <div class="search-box">
+                        <input type="text" id="search-input" placeholder="Search by name or category">
+                        <button id="search-btn" class="secondary">Search</button>
+                    </div>
+                </div>
+                <div id="products" class="product-list"></div>
+            </section>
+
+            <section class="card cart-card">
+                <div class="section-head">
+                    <div>
+                        <h2>Cart</h2>
+                        <p>Review items before mock checkout.</p>
+                    </div>
+                    <button id="checkout-btn">Checkout</button>
+                </div>
+                <div id="cart-items" class="cart-list"></div>
+                <div class="cart-footer">
+                    <span>Total</span>
+                    <strong id="cart-total">₹0.00</strong>
+                </div>
+                <p id="checkout-message" class="message"></p>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
